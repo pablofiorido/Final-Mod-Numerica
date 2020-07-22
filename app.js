@@ -30,6 +30,23 @@ var listLq2 = null
 var listWq2 = null
 var listP02 = null
 
+var lambda3 = null
+var mu3 = null
+var tita3 = null
+var Ro3 = null
+var Ls3 = null
+var Ws3 = null
+var Lq3 = null
+var Wq3 = null
+var Pcero3 = null
+var sendBtn3 = null
+var listRo3 = null
+var listLs3 = null
+var listWs3 = null
+var listLq3 = null
+var listWq3 = null
+var listP03 = null
+
 var sendForm = function (evt) {
 
     evt.preventDefault()
@@ -103,6 +120,41 @@ var sendForm2 = function (evt) {
 
 
 
+var sendForm3 = function (evt) {
+
+    evt.preventDefault()
+    if (lambda3.value > 0 && mu3.value > 0) {
+        Ro3 = parseFloat(lambda3.value) / parseFloat(mu3.value)
+        tita3 = parseFloat(tita3.value)
+        if (Ro3 < 1) {
+            Lq3 = (((parseFloat(lambda3.value) * parseFloat(lambda3.value)) * (tita3 * tita3)) + (Ro3 * Ro3)) / (2 * (1 - Ro3))
+            Wq3 = Lq3 / parseFloat(lambda3.value)
+            Ws3 = Wq3 + (1 / (parseFloat(mu3.value)))
+            Ls3 = (Lq3 + Ro3)
+            Pcero3 = (1 - Ro3)
+
+            listRo3.innerHTML = Ro3
+            listLs3.innerHTML = Ls3
+            listWs3.innerHTML = Ws3
+            listLq3.innerHTML = Lq3
+            listWq3.innerHTML = Wq3
+            listP03.innerHTML = Pcero3
+
+            console.log(Ro3)
+            console.log(Ls3)
+            console.log(Ws3)
+            console.log(Lq3)
+            console.log(Wq3)
+            console.log(Pcero3)
+        } else {
+            listRo3.innerHTML = Ro3
+            window.alert('SERVIDOR SATURADO. No se pueden calcular medidas de desempeño')
+        }
+
+    }
+
+}
+
 window.onload = function () {
 
     lambda = document.getElementById('lambda')
@@ -118,6 +170,7 @@ window.onload = function () {
     sendBtn = document.getElementById('send')
     sendBtn.onclick = sendForm
 
+
     lambda2 = document.getElementById('lambda2')
     mu2 = document.getElementById('mu2')
 
@@ -130,4 +183,19 @@ window.onload = function () {
 
     sendBtn2 = document.getElementById('send2')
     sendBtn2.onclick = sendForm2
+
+
+    lambda3 = document.getElementById('lambda3')
+    mu3 = document.getElementById('mu3')
+    tita3 = document.getElementById('tita3')
+
+    listRo3 = document.getElementById('listRo3')
+    listLs3 = document.getElementById('listLs3')
+    listWs3 = document.getElementById('listWs3')
+    listLq3 = document.getElementById('listLq3')
+    listWq3 = document.getElementById('listWq3')
+    listP03 = document.getElementById('listP03')
+
+    sendBtn3 = document.getElementById('send3')
+    sendBtn3.onclick = sendForm3
 }
